@@ -40,24 +40,28 @@ export class StudentNewComponent implements OnInit {
         })
     }
     saveMachaStudent():void{
-        let machaStudent = JSON.stringify({
+    //     let machaStudent = JSON.stringify({
 
         
-        // console.log(this.machaStudent.value)
-        studentApplicationNumber:this.machaStudent.get("studentApplicationNumber")?.value,
-        studentName:this.machaStudent.get("studentName")?.value,
-        studentGender:this.machaStudent.get("studentGender")?.value,
-        studentDateOfBirth:this.machaStudent.get("studentDateOfBirth")?.value,
-        studentAadhaarNumber:this.machaStudent.get("studentAadhaarNumber")?.value,
-        studentEmailAddress:this.machaStudent.get("studentEmailAddress")?.value,
-        studentPhoneNumber:this.machaStudent.get("studentPhoneNumber")?.value
+    //     // console.log(this.machaStudent.value)
+    //     studentApplicationNumber:this.machaStudent.get("studentApplicationNumber")?.value,
+    //     studentName:this.machaStudent.get("studentName")?.value,
+    //     studentGender:this.machaStudent.get("studentGender")?.value,
+    //     studentDateOfBirth:this.machaStudent.get("studentDateOfBirth")?.value,
+    //     studentAadhaarNumber:this.machaStudent.get("studentAadhaarNumber")?.value,
+    //     studentEmailAddress:this.machaStudent.get("studentEmailAddress")?.value,
+    //     studentPhoneNumber:this.machaStudent.get("studentPhoneNumber")?.value
 
         
-    })
-        console.log(machaStudent,"machastudent");
-        this.modelDispenser.getaddstudentDetails(machaStudent).subscribe(machaStudent =>{
+    // })
+        console.log(this.machaStudent,"machastudent");
+        this.modelDispenser.addstudentDetails(this.machaStudent.value).subscribe(machaStudent =>{
             console.log(machaStudent)
-            this.messageService.success("data is submitted")
+            this.createStudent();
+            alert("data is submitted")
+        },
+        error => {
+           alert("Server is not working") 
         })
     }
 }

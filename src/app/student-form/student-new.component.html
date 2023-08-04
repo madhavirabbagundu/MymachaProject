@@ -2,24 +2,32 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-12">
-                  <h1 class="h3 mb-3">Add New Macha Student</h1>
-                </div>
+               
+                <div class="row shadow-none p-1 mb-3 bg-light rounded">
+                    <div class="col-12 col-lg-3">
+                      <h1 class="h3 mb-3">Student List</h1>
+                    </div>
+                    <div class="col-12 col-lg-9">
+                      <div class="float-right mb-3">
+                        <a class="btn btn-square btn-primary" routerLink="./student/list">Add New Macha Student</a>
+                      </div>
+                    </div>
+                  </div>
             </div>
             <div class="shadow p-3 mb-5 bg-custom-color rounded" id="main_form">
                 <div class="form-2" style="margin: 10px;">
                     <div class="row">
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label class="col-form-label">Application ID </label><span style="color: red;">*</span>
-                            <input type="text" class="form-control"
+                            <input type="text" class="form-control"placeholder="Please enter ApplicantId"
                                 formControlName="studentApplicationNumber" maxlength="15"  />
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label class="col-form-label">Student Name </label><span style="color: red;">*</span>
                             <input type="text" class="form-control" placeholder="Please enter name"
                                 formControlName="studentName" maxlength="15"   />
                         </div>
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label class="col-form-label">Student Gender</label><span style="color: red;">*</span>
                             <div class="gender-Radio">
                                 <label class="form-check">
@@ -36,25 +44,25 @@
                             <!-- <label *ngIf="homevisitApplicantDetails.get('applicantHouse').touched && homevisitApplicantDetails.get('applicantHouse').invalid" style="color: red;">Does applicant live in house? required.</label> -->
                         </div>
 
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label class="col-form-label">Date of birth</label><span style="color: red;">*</span>
                             <input type="date" class="form-control" placeholder="Please select date of birth"
                                 formControlName="studentDateOfBirth"  />
                         </div>
 
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label class="col-form-label">Aadhar number</label><span style="color: red;">*</span>
                             <input type="text" class="form-control" placeholder="Please enter Aadhaar number" 
                                 formControlName="studentAadhaarNumber" maxlength=12  />
                         </div>
 
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label class="col-form-label">Email ID (Optional) </label>
                             <input type="email" class="form-control" placeholder="Please enter first name"
                                 formControlName="studentEmailAddress" maxlength="15"  />
                         </div>
 
-                        <div class="col-md-4 col-sm-12">
+                        <div class="col-md-3 col-sm-12">
                             <label class="col-form-label">Mobile number (Optional)</label>
                             <input type="text" class="form-control"  placeholder="Please enter mobile number"
                                 formControlName="studentPhoneNumber" maxlength="10"  />
@@ -67,10 +75,11 @@
                     <div class="col-md-6 col-sm-12">
                       <h5><span style="color: red;">*</span> are mandatory fields in all steps</h5>
                     </div>
-                    <div class="col-md-6 col-sm-12" style="margin-top: -28px;">
+                    <div class="col-md-6 col-sm-12">
                       <ul class="list-inline pull-right">
-                        <li><button type="button" class="default-btn btn-primary next-step mx-4 ">Cancel</button></li>
-                        <li><button type="button" class="default-btn btn-primary next-step" (click)="saveMachaStudent()">Submit</button></li>
+                        <li><button type="button" class="btn btn-primary float-end "  style = "margin:5px;"(click)="saveMachaStudent()">Submit</button></li>
+                        <li><button type="button" class="btn btn-primary float-end "  style = "margin:5px;">Cancel</button></li>
+
                       </ul>
                     </div>
                   </div>
