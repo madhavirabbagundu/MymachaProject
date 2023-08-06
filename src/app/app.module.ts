@@ -36,7 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     RouterModule.forRoot(
       [
         {
-          path:"student/form",
+          path:"student/:mode/form",
           component:StudentNewComponent,
           pathMatch:"full"
         },

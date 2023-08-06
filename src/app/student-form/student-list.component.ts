@@ -21,6 +21,7 @@ export class StudentListComponent implements OnInit {
     private router: Router,
   ){
     this.mode = this.route.snapshot.paramMap.get('mode');
+    console.log(this.mode,"this.mode")
   }
   ngOnInit(): void {
     this.getAllStudents();   
@@ -31,10 +32,10 @@ export class StudentListComponent implements OnInit {
   getAllStudents(){
     this.modelDispenser.getAllStudents().subscribe((data)=>{
       this.studentList = data;
-    //   $(document).ready(function() {
-    //     console.log("DOCUEMNT")
-    //     $('#example').DataTable();
-    //   });
+      // $(document).ready(function() {
+      //   console.log("DOCUEMNT")
+      //   $('#example').DataTable();
+      // });
     },
     (error) => {
       if (error !== undefined && error.status === 404) {
@@ -48,9 +49,9 @@ export class StudentListComponent implements OnInit {
   }
 
   onStudentDetails(student:any,mode:any){
-    console.log(student,mode,"studentMode")
+    console.log(student,mode,"studentdata")
     sessionStorage.setItem('applicationNumber',student);
-    this.router.navigate([`/student/form`]);
+    this.router.navigate([`/student/edit/form`]);
   }
 
   onStudentDelete(index:any){
@@ -59,6 +60,7 @@ export class StudentListComponent implements OnInit {
    
         this.modelDispenser.softDeleteByStudentId(deletedStudentData).subscribe(response=>{
        alert("Student Data Deleted!!")
+
             this.getAllStudents();
           // console.log("this is the delete",this.interviewView);
 
@@ -70,6 +72,7 @@ export class StudentListComponent implements OnInit {
       
     // })
   }
+ 
   convertToLocalDateTime(lchgDate: string) {
     const timestamp = new Date(lchgDate);
     const dateObj = new Date(timestamp);

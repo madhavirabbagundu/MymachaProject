@@ -9,30 +9,38 @@
                    
                   </div>
                 <table id="example"style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>Application ID</th>
-                            <th>Student Name</th>
-                            <th>Date & Time</th>
-                            <th>Actions</th>
+                    <thead class = "tableData">
+                        <tr class = "tableData">
+                            <th class = "tableData">Application ID</th>
+                            <th class = "tableData">Student Name</th>
+                            <th class = "tableData">Date & Time</th>
+                            <th class = "tableData">Edit</th>
+                            <th class = "tableData">Delete</th>
+
                         </tr>
                     </thead>
                     <tbody>
 
                          <tr *ngFor="let student of studentList let i = index">
-                            <td>{{ student.studentApplicationNumber }}</td>
-                            <td>{{ student.studentName }}</td>
-                            <td>{{ convertToLocalDateTime(student.lchgDate) }}</td>
-                            <td><a (click)="onStudentDetails(student.studentApplicationNumber, 'edit')">Edit<i class="align-middle"
-                                  data-feather="edit-2"></i></a>
-                                &nbsp;<a (click)="onStudentDelete(i)" style="color:brown">Delete<i class="align-middle" data-feather="trash"></i></a></td>
+                            <td class = "tableData">{{ student.studentApplicationNumber }}</td>
+                            <td class = "tableData">{{ student.studentName }}</td>
+                            <td class = "tableData">{{ convertToLocalDateTime(student.lchgDate) }}</td>
+                            <td class = "tableData">
+                                <a (click)="onStudentDetails(student.studentGeneratedId,'edit')"><img style = "width:30px" src = "https://static.thenounproject.com/png/2473159-200.png"/></a>
+                            </td>
+                            <td class = "tableData">
+                                <a (click)="onStudentDelete(i)" style="color:brown"><img style = "width:30px" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTKlx-JXGMLbOTIU1CqUL1gEHQFMdSHJy8FA&usqp=CAU"/></a>
+
+                            </td>
                         </tr> 
                     </tbody>
                     <tfoot>
                        
                     </tfoot>
                 </table>
+
             </div>
     </div>
+
     </div>
     </div>
