@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule} from '@angular/common/http';
 import {NavbarComponent} from './navbar/navbar.component';
@@ -10,6 +10,7 @@ import { RouterLinkActive, RouterModule } from '@angular/router';
 import { DatePipe } from '@angular/common';
 import { StudentService } from './services/student.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HomevisitComponent } from './student-form/homevisit.component';
 // import { MatDialogModule } from "@angular/material/dialog";
 // import { MatButtonModule } from "@angular/material/button";
 
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     NavbarComponent,
     StudentNewComponent,
-    StudentListComponent
+    StudentListComponent,
+    HomevisitComponent,
 
   ],
   imports: [
@@ -43,6 +45,11 @@ import { ReactiveFormsModule } from '@angular/forms';
         {
           path:"student/list",
           component:StudentListComponent,
+          pathMatch:"full"
+        },
+        {
+          path:"homevisit/form",
+          component:HomevisitComponent,
           pathMatch:"full"
         }
       ]
