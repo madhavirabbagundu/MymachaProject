@@ -11,9 +11,10 @@ import { DatePipe } from '@angular/common';
 import { StudentService } from './services/student.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomevisitComponent } from './student-form/homevisit.component';
+import { HomevisitListComponent } from './student-form/homevisit-list.component';
 // import { MatDialogModule } from "@angular/material/dialog";
 // import { MatButtonModule } from "@angular/material/button";
-
+// import { HomevisitListComponent } from './student-form/homevisit-list.component'
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -24,6 +25,7 @@ import { HomevisitComponent } from './student-form/homevisit.component';
     StudentNewComponent,
     StudentListComponent,
     HomevisitComponent,
+    HomevisitListComponent,
 
   ],
   imports: [
@@ -48,9 +50,14 @@ import { HomevisitComponent } from './student-form/homevisit.component';
           pathMatch:"full"
         },
         {
-          path:"homevisit/form",
+          path:"homevisit/:mode/form",
           component:HomevisitComponent,
           pathMatch:"full"
+        },
+        {
+        path:"homevisit/list",
+        component:HomevisitListComponent,
+        pathMatch:"full"
         }
       ]
     )

@@ -31,7 +31,10 @@ export class StudentListComponent implements OnInit {
   
   getAllStudents(){
     this.modelDispenser.getAllStudents().subscribe((data)=>{
+      console.log(data,"data")
       this.studentList = data;
+      // console.log(data,"data")
+
       // $(document).ready(function() {
       //   console.log("DOCUEMNT")
       //   $('#example').DataTable();

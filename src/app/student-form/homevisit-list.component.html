@@ -1,0 +1,48 @@
+<div class="card">
+    <div class="card-body">
+        <div class="tab-content" id="main_form">
+            <div class="container">
+                <div>
+                    <div class="col-12 col-lg-3">
+                      <h1 class="h3 mb-3">Homevisit List</h1>
+                    </div>
+                   
+                  </div>
+                <table id="example"style="width:100%">
+                    <thead class = "tableData">
+                        <tr class = "tableData">
+                            <th class = "tableData">Application ID</th>
+                            <th class = "tableData">Student Name</th>
+                            <th class = "tableData">Nationality</th>
+                            <th class = "tableData">Village</th>
+                            <th class = "tableData">Edit</th>
+                            <th class = "tableData">Delete</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                         <tr *ngFor="let details of homevisitList let i = index">
+                            <td class = "tableData">{{ details.applicationNumber }}</td>
+                            <td class = "tableData">{{ details.applicantName }}</td>
+                            <td class = "tableData">{{ details.nationality }}</td>
+                            <td class = "tableData">{{details.village}}</td>
+                            <td class = "tableData">
+                                <a (click)="onHomevisitDetails(details.id,'edit')"><img style = "width:30px" src = "https://static.thenounproject.com/png/2473159-200.png"/></a>
+                            </td>
+                            <td class = "tableData">
+                                <a (click)="onHomevistDelete(i)" style="color:brown"><img style = "width:30px" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTKlx-JXGMLbOTIU1CqUL1gEHQFMdSHJy8FA&usqp=CAU"/></a>
+
+                            </td>
+                        </tr> 
+                    </tbody>
+                    <tfoot>
+                       
+                    </tfoot>
+                </table>
+
+            </div>
+    </div>
+
+    </div>
+    </div>
