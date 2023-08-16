@@ -42,23 +42,20 @@ export class StudentNewComponent implements OnInit {
     }
     createStudent():void{
         this.machaStudent = new FormGroup({
-          studentGeneratedId:new FormControl(null),
             studentApplicationNumber : new FormControl(null,[Validators.required]),
             studentName : new FormControl(null,[Validators.required]),
             studentGender : new FormControl(null,[Validators.required]),
             studentDateOfBirth:new FormControl(null,[Validators.required]),
-            studentAadhaarNumber:new FormControl(null,[Validators.required]),
+            studentAadhaarNumber:new FormControl(null),
             studentPhoneNumber:new FormControl(null),
-            studentEmailAddress:new FormControl(null)
+            studentEmailAddress:new FormControl(null,[Validators.required])
 
         })
     }
     loadFormValues(student:any){
         console.log(student,"Data");
         const dob = new Date(student.studentDateOfBirth!.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
-        console.log(dob);
         student.studentDateOfBirth = this.datepipe.transform(dob, 'yyyy-MM-dd');
-        console.log(student);
         this.machaStudent.patchValue(student);
       }
       validateNumber(event:any, type?:any): boolean {
@@ -78,9 +75,9 @@ export class StudentNewComponent implements OnInit {
       
     saveMachaStudent():void{
       
-        console.log(this.machaStudent,"machastudent");
+        console.log(this.machaStudent.value.length,"machastudent");
         this.modelDispenser.addstudentDetails(this.machaStudent.value).subscribe(machaStudent =>{
-            console.log(machaStudent,"macha")
+            console.log(this.machaStudent.value.length,"macha")
             this.createStudent();
             alert("Student Data is submitted")
             this.router.navigate([`student/list`]);

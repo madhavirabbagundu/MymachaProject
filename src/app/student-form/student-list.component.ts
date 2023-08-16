@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { StudentService } from '../services/student.service';
 import * as feather from "feather-icons";
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -14,8 +14,10 @@ export class StudentListComponent implements OnInit {
   studentList: any;
   mode: any;
     result: any;
+  items: any;
+  searchTerm: string = '';
   constructor(
-    private modelDispenser:StudentService,
+    private studentModel:StudentService,
     private route: ActivatedRoute,
     // private messageService: SnackBarService,
     private router: Router,
@@ -30,8 +32,9 @@ export class StudentListComponent implements OnInit {
 
   
   getAllStudents(){
-    this.modelDispenser.getAllStudents().subscribe((data)=>{
+    this.studentModel.getAllStudents().subscribe((data)=>{
       console.log(data,"data")
+      this.items = data;
       this.studentList = data;
       // console.log(data,"data")
 
@@ -61,7 +64,7 @@ export class StudentListComponent implements OnInit {
     const deletedStudentData = this.studentList[index]
     console.log("delete",deletedStudentData)
    
-        this.modelDispenser.softDeleteByStudentId(deletedStudentData).subscribe(response=>{
+        this.studentModel.softDeleteByStudentId(deletedStudentData).subscribe(response=>{
        alert("Student Data Deleted!!")
 
             this.getAllStudents();
@@ -92,5 +95,19 @@ export class StudentListComponent implements OnInit {
     lchgDate = dateObj.toLocaleString('en-IN', options);
     return lchgDate;
   }
+  // search(){
+  //   console.log();
+
+  //   if (!this.searchTerm) {
+  //     this.studentList = []; // Clear results when search term is empty
+  //     return;
+  //   }
+  
+  //   // Example: Filtering based on an array of items
+  //   this.studentList = this.items.filter((item: { name: string; }) =>
+  //     item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+  //   );
+  
+  // }
   
 }

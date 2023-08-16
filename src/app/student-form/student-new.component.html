@@ -53,7 +53,7 @@
                         <div class="col-md-3 col-sm-12">
                             <label class="col-form-label">Aadhar number</label><span style="color: red;">*</span>
                             <input type="text" class="form-control" placeholder="Please enter Aadhaar number" (keypress)="validateNumber($event)"
-                                formControlName="studentAadhaarNumber" maxlength=12 required />
+                                formControlName="studentAadhaarNumber" maxlength=12 />
                         </div>
 
                         <div class="col-md-3 col-sm-12">
@@ -63,9 +63,9 @@
                         </div>
 
                         <div class="col-md-3 col-sm-12">
-                            <label class="col-form-label">Mobile number (Optional)</label>
+                            <label class="col-form-label">Mobile number</label>
                             <input type="text" class="form-control"  placeholder="Please enter mobile number"(keypress)="validateNumber($event)"
-                                formControlName="studentPhoneNumber" maxlength="10" />
+                                formControlName="studentPhoneNumber" maxlength="10" required />
                         </div>
 
                     </div>
