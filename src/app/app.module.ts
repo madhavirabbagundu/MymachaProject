@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomevisitComponent } from './student-form/homevisit.component';
 import { HomevisitListComponent } from './student-form/homevisit-list.component';
 import { SearchPipe } from './search.pipe';
+import { StudentProfileComponent } from './student-form/student-profile.component'
+import { HomevisitProfileComponent } from "./student-form/homevisit-profile.component"
 // import { MatDialogModule } from "@angular/material/dialog";
 // import { MatButtonModule } from "@angular/material/button";
 // import { HomevisitListComponent } from './student-form/homevisit-list.component'
@@ -28,7 +30,9 @@ import { SearchPipe } from './search.pipe';
     HomevisitComponent,
     HomevisitListComponent,
     // FormsModule,
-    SearchPipe
+    SearchPipe,
+    StudentProfileComponent,
+    HomevisitProfileComponent
 
   ],
   imports: [
@@ -61,6 +65,16 @@ import { SearchPipe } from './search.pipe';
         path:"homevisit/list",
         component:HomevisitListComponent,
         pathMatch:"full"
+        },
+        {
+        path:"student/profile",
+        component:StudentProfileComponent,
+        pathMatch:"full"
+        },
+        {
+          path:"homevisit/profile",
+          component:HomevisitProfileComponent,
+          pathMatch:"full"
         }
       ]
     )

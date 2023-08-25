@@ -19,17 +19,18 @@ export class StudentNewComponent implements OnInit {
     mode: any;
 
     constructor(
-        private modelDispenser : StudentService,
+        private studentdata : StudentService,
         private route: ActivatedRoute,
         private router: Router,
         public datepipe: DatePipe,
     
     ){
         this.mode = this.route.snapshot.paramMap.get('mode');
-        // console.log(this.mode,"this.mode")
-        if (this.mode === 'edit') {
-            let applicantionNumber:any =  sessionStorage.getItem('applicationNumber');
-            this.modelDispenser.getStudentById(JSON.parse(applicantionNumber)).subscribe(data => {
+        console.log(this.mode,"this.mode in new")
+        if (this.mode === 'edit' || this.mode === 'view') {
+            let applicantionData:any =  sessionStorage.getItem('applicationNumber');
+            console.log(applicantionData,"mode in getting")
+            this.studentdata.getStudentById(JSON.parse(applicantionData)).subscribe(data => {
               this.loadFormValues(data);
             });
           }
@@ -42,6 +43,7 @@ export class StudentNewComponent implements OnInit {
     }
     createStudent():void{
         this.machaStudent = new FormGroup({
+          studentGeneratedId : new FormControl(null),
             studentApplicationNumber : new FormControl(null,[Validators.required]),
             studentName : new FormControl(null,[Validators.required]),
             studentGender : new FormControl(null,[Validators.required]),
@@ -54,7 +56,7 @@ export class StudentNewComponent implements OnInit {
     }
     loadFormValues(student:any){
         console.log(student,"Data");
-        const dob = new Date(student.studentDateOfBirth!.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+        const dob = new Date(student.studentDateOfBirth!.replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3")); 
         student.studentDateOfBirth = this.datepipe.transform(dob, 'yyyy-MM-dd');
         this.machaStudent.patchValue(student);
       }
@@ -76,7 +78,7 @@ export class StudentNewComponent implements OnInit {
     saveMachaStudent():void{
       
         console.log(this.machaStudent.value.length,"machastudent");
-        this.modelDispenser.addstudentDetails(this.machaStudent.value).subscribe(machaStudent =>{
+        this.studentdata.addstudentDetails(this.machaStudent.value).subscribe(machaStudent =>{
             console.log(this.machaStudent.value.length,"macha")
             this.createStudent();
             alert("Student Data is submitted")
@@ -84,6 +86,9 @@ export class StudentNewComponent implements OnInit {
 
         },
         error => {
+          if(error === 404){
+            alert("person is already log in")
+          }
            alert("Server is not working") 
         })
     }

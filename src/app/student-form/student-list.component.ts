@@ -16,8 +16,13 @@ export class StudentListComponent implements OnInit {
     result: any;
   items: any;
   searchTerm: string = '';
+  selectedRowIndex: number = -1;
+  applicantInfo:any;
+  applicantId: any;
+  selectedRoute: any;
+  
   constructor(
-    private studentModel:StudentService,
+    private studentdata:StudentService,
     private route: ActivatedRoute,
     // private messageService: SnackBarService,
     private router: Router,
@@ -26,13 +31,14 @@ export class StudentListComponent implements OnInit {
     console.log(this.mode,"this.mode")
   }
   ngOnInit(): void {
-    this.getAllStudents();   
+    this.getAllStudents();  
+   this.selectedRoute = ""; 
     feather.replace();
   }
 
   
   getAllStudents(){
-    this.studentModel.getAllStudents().subscribe((data)=>{
+    this.studentdata.getAllStudents().subscribe((data)=>{
       console.log(data,"data")
       this.items = data;
       this.studentList = data;
@@ -54,17 +60,16 @@ export class StudentListComponent implements OnInit {
       }});
   }
 
-  onStudentDetails(student:any,mode:any){
-    console.log(student,mode,"studentdata")
-    sessionStorage.setItem('applicationNumber',student);
-    this.router.navigate([`/student/edit/form`]);
-  }
+  // onStudentDetails(student:any,mode:any){
+  //   console.log(student,mode,"studentdata")
+  //   this.router.navigate([`/student/edit/form`]);
+  // }
 
   onStudentDelete(index:any){
     const deletedStudentData = this.studentList[index]
     console.log("delete",deletedStudentData)
    
-        this.studentModel.softDeleteByStudentId(deletedStudentData).subscribe(response=>{
+        this.studentdata.softDeleteByStudentId(deletedStudentData).subscribe(response=>{
        alert("Student Data Deleted!!")
 
             this.getAllStudents();
@@ -78,7 +83,25 @@ export class StudentListComponent implements OnInit {
       
     // })
   }
- 
+  navigateTo(event: any) {
+    this.selectedRoute = event.target.value;
+    // console.log(this.selectedRoute,"route")
+    if(this.selectedRoute === 'homevisitProfile'){
+      sessionStorage.setItem("applicantData",JSON.stringify(this.applicantInfo))
+      sessionStorage.setItem("applicationNumber",this.applicantId)
+      this.router.navigate([`homevisit/profile`]);
+    }
+    // this.router.navigate([selectedRoute]);
+  }
+  // onhomevisitClick(){
+  //   console.log(this.selectedRoute,"route")
+  //   if(this.selectedRoute === 'homevisitProfile'){
+  //     console.log(this.selectedRoute,"route")
+
+  //     // sessionStorage.setItem("applicantData",JSON.stringify(this.applicantInfo))
+  //     // sessionStorage.setItem("applicantNumber",JSON.stringify(this.applicantId))
+  //   }
+  // }
   convertToLocalDateTime(lchgDate: string) {
     const timestamp = new Date(lchgDate);
     const dateObj = new Date(timestamp);
@@ -95,19 +118,38 @@ export class StudentListComponent implements OnInit {
     lchgDate = dateObj.toLocaleString('en-IN', options);
     return lchgDate;
   }
-  // search(){
-  //   console.log();
 
-  //   if (!this.searchTerm) {
-  //     this.studentList = []; // Clear results when search term is empty
-  //     return;
-  //   }
+  studentDetails(student:any,mode:any){
+    console.log(student,"studentdata")
+   sessionStorage.setItem('applicationNumber',JSON.stringify(student));
+
+    console.log(mode)
+    if(mode === 'edit'){
+   
+      this.router.navigate([`/student/edit/form`]);
+    }
+    else if(mode === 'view'){
+      this.router.navigate([`/student/profile`]);
+
+      
+
+
+    }
+  }
+
+  clickTableRow(index: number,studentData:any): void {
+    console.log(studentData,"row")
+    this.selectedRowIndex = index;
+    this.applicantId = studentData.studentApplicationNumber;
+    console.log(this.applicantId,"id")
+    this.applicantInfo = {
+      applicantId : studentData.studentApplicationNumber,
+      applicantName : studentData.studentName,
+    };
+    console.log(this.applicantInfo,"info")
+
+  }
   
-  //   // Example: Filtering based on an array of items
-  //   this.studentList = this.items.filter((item: { name: string; }) =>
-  //     item.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-  //   );
-  
-  // }
+ 
   
 }

@@ -24,8 +24,9 @@ export class StudentService {
         const url = `${this.endPoint}/student/get`;
         return this.http.get(url);
       }
-      getStudentById(applicationNumber:any){
-        const url = `${this.endPoint}/student/get/${applicationNumber}`;
+      getStudentById(studentApplicationNumber:any){
+        const url = `${this.endPoint}/student/get/${studentApplicationNumber}`;
+        console.log(url)
         return this.http.get(url);
       }
       softDeleteByStudentId(data:any):Observable<any>{

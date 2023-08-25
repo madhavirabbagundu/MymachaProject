@@ -7,7 +7,7 @@
                       <h1 class="h3 mb-3">Student List</h1>
                     </div>
                     <div class="col-12 col-lg-3">
-                         <input type="text" placeholder="Search"> 
+                         <!-- <input type="text" placeholder="Search">  -->
                      </div> 
 
                   </div>
@@ -24,12 +24,13 @@
                     </thead>
                     <tbody>
 
-                         <tr *ngFor="let student of studentList let i = index">
-                            <td class = "tableData">{{ student.studentApplicationNumber }}</td>
+                         <tr *ngFor="let student of studentList let i = index" [class.clicked]="selectedRowIndex === i"
+                         (click)="clickTableRow(i,student)">
+                            <td class = "tableData"><a class = "link" (click)="studentDetails(student,'view')">{{ student.studentApplicationNumber }}</a></td>
                             <td class = "tableData">{{ student.studentName }}</td>
                             <td class = "tableData">{{ convertToLocalDateTime(student.lchgDate) }}</td>
                             <td class = "tableData">
-                                <a (click)="onStudentDetails(student.studentGeneratedId,'edit')"><img style = "width:30px" src = "https://static.thenounproject.com/png/2473159-200.png"/></a>
+                                <a (click)="studentDetails(student.studentGeneratedId,'edit')"><img style = "width:30px" src = "https://static.thenounproject.com/png/2473159-200.png"/></a>
                             </td>
                             <td class = "tableData">
                                 <a (click)="onStudentDelete(i)" style="color:brown"><img style = "width:30px" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTKlx-JXGMLbOTIU1CqUL1gEHQFMdSHJy8FA&usqp=CAU"/></a>
@@ -41,10 +42,10 @@
                        
                     </tfoot>
                 </table>
-                <select>
+                <select class = "selectBox" (change)="navigateTo($event)">
                     <option>--Select--</option>
-                    <option><a>Interview Process</a></option>
-                    <option>Homevisit Process</option>
+                    <option>Interview Process</option>
+                    <option value ="homevisitProfile">Homevisit Process</option>
                 </select>
 
             </div>
